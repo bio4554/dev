@@ -16,4 +16,9 @@ void draw_map() {
 			mvaddch(y, x, cave[x][y].icon);
 }
 
-
+int ccheck(int x, int y, int dir, tile check) {
+	if(cave[x][y] == check)
+		return true;
+	else
+		return false;
+}
