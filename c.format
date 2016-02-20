@@ -1,0 +1,44 @@
+bio4554 C Program design guidelines Version 1.0
+
+All C programs should follow this guideline.
+
+HEADERS:
+
+config.h : Contains all preprocessor define statements, and only define statements.
+
+externs.h : Contains all global variables, and all function definitions. Function definitions should be defined as follows:
+   ^
+   |
+variable.c : Defines global variables
+
+------------------------------------------
+
+/* file.c */
+void func1();
+void func2();
+
+/* file2.c */
+int func3();
+float func4(int);
+
+------------------------------------------
+
+types.h : Contains all typedef's, including structs. THESE ARE REQUIRED
+
+------------------------------------------
+
+typedef unsigned long  int32u; // 32 bit unsigned integer
+typedef long           int32;  // 32 bit integer
+typedef unsigned short int16u; // 16 bit unsigned integer
+typedef short          int16;  // 16 bit integer
+typedef unsigned char  int8u;  // 8 bit integer, or 1 byte
+
+------------------------------------------
+
+ROGUELIKE THINGS
+
+monster.h : Contains monster defintions
+
+
+
+
