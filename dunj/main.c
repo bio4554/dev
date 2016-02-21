@@ -6,6 +6,7 @@
 int main()
 {
 	char c;
+	rnd_seed(0);
 	creature player;
 	player.name = "Player";
 	player.icon = '@';
@@ -14,6 +15,7 @@ int main()
 	init_curses();
 	generate(1);
 	draw_creature(&player);
+	draw_level_cre();
 	draw_map();
 	refresh();
 	while((c=getch())!='q') {
@@ -27,6 +29,7 @@ int main()
 		if(c=='d')
 			cmove(&player, 4);
 		draw_creature(&player);
+		draw_level_cre();
 		draw_map();
 		refresh();
 	}

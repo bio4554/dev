@@ -4,4 +4,5 @@
 
 creature monsters[MAX_MONSTERS] = {
 	{"Skeleton", 's'},
+	{"Orc", 'o'},
 };

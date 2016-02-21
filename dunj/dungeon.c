@@ -26,3 +26,19 @@ void add_cre(creature newcre) {
 		i++;
 	}
 }
+
+void populate_level(int numof, int type, int reset) {
+	static int p = 0; //Location in stack
+	int i;
+	if(reset == 1)
+		p = 0;
+	if(type < MAX_MONSTERS)
+	{
+		for(i = 0; i < numof; i++)
+		{
+			add_cre(monsters[type]);
+			get_rand_loc(&level_cre[p]);
+			p++;
+		}
+	}
+}
