@@ -21,10 +21,12 @@ void fill(int x1, int y1, int x2, int y2, tile temp) {
 }
 
 void generate(int type) {
-	tile wall = {'#', 0};
-	tile floor = {' ', 1};
+	init_cre();
 	if(type == 1) {//Cave
-		fill(0, 0, MAX_X, MAX_Y, wall); 
-		fill(MAX_X/2-10, MAX_Y/2-5, MAX_X/2+10, MAX_Y/2+5, floor);
+
+		fill(0, 0, MAX_X, MAX_Y, WALL); 
+		fill(MAX_X/2-10, MAX_Y/2-5, MAX_X/2+10, MAX_Y/2+5, FLOOR);
+		
+
 	}
 }
