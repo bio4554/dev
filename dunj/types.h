@@ -3,10 +3,6 @@
 
 typedef const char* string;
 
-typedef struct {
-	char icon;
-	int walk; // TRUE or FALSE
-} tile;
 
 typedef struct {
 	string name;
@@ -14,5 +10,13 @@ typedef struct {
 	int x;
 	int y;
 } creature;
+
+typedef struct {
+	char icon;
+	int walk; // TRUE or FALSE
+	int type; // 0 for material, 1 for creature
+	creature *cre;
+} tile;
+
 
 #endif

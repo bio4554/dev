@@ -23,6 +23,7 @@ void get_rand_loc(creature*); //Set given creatures location to an empty locatio
 /* creature.c */
 void draw_creature(creature*); //Draw given creature onto screen
 void cmove(creature*,int); //Move a given creature in a given direction
+void attack(creature*, creature*);
 
 /* dungeon.c */
 void init_cre(); //Initialize level creature stack for use MUST RUN ONCE BEFORE EACH NEW LEVEL

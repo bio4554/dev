@@ -40,3 +40,7 @@ int ccheck(int x, int y, int dir, tile check) {
 
 
 }
+
+void printm(char* str) {
+	mvprintw(MAX_Y+2, 2, 
+}

@@ -23,4 +23,18 @@ void cmove(creature *cre, int dir) {
 	if(dir == 4)
 		if(cave[x+1][y].walk == 1)
 			cre->x++;
+
+	if(dir == 1)
+		if(cave[x][y-1].type == 1)
+			attack(cre, cave[x][y-1].cre);
+	if(dir == 2)
+		if(cave[x][y+1].type == 1)
+			attack(cre, cave[x][y+1].cre);
+	if(dir == 3)
+		if(cave[x-1][y].type == 1)
+			attack(cre, cave[x-1][y].cre);
+	if(dir == 4)
+		if(cave[x+1][y].type == 1)
+			attack(cre, cave[x+1][y].cre);
+
 }
