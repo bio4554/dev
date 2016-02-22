@@ -1,10 +1,11 @@
 #include <stdio.h>
+#include <ncurses.h>
 #include "config.h"
 #include "types.h"
 #include "externs.h"
 
 void draw_creature(creature *cre) {
-	tile cretemp = {cre->icon, 0};
+	tile cretemp = {cre->icon, 0, 1};
 	cave[cre->x][cre->y] = cretemp;
 }
 
@@ -32,9 +33,13 @@ void cmove(creature *cre, int dir) {
 			attack(cre, cave[x][y+1].cre);
 	if(dir == 3)
 		if(cave[x-1][y].type == 1)
-			attack(cre, cave[x-1][y].cre);
+			printf("%p\n",cave[x-1][y].cre);
 	if(dir == 4)
 		if(cave[x+1][y].type == 1)
 			attack(cre, cave[x+1][y].cre);
 
+}
+
+void attack(creature *atk, creature *def) {
+	printf("%s attacked %s\n", atk->name, def->name);
 }

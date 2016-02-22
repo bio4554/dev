@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "config.h"
 #include "types.h"
 #include "externs.h"
@@ -22,6 +23,8 @@ void fill(int x1, int y1, int x2, int y2, tile temp) {
 
 void get_rand_loc(creature *cre) {
 	int x, y;
+	creature *temp = cre;
+	printf("%p ", temp);
 	do
 	{
 		x = rnd(0, MAX_X);
@@ -31,6 +34,7 @@ void get_rand_loc(creature *cre) {
 	{
 		cre->x = x;
 		cre->y = y;
+		*cave[x][y].cre = temp;
 	}
 }
 
