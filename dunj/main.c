@@ -12,6 +12,8 @@ int main()
 	player.icon = '@';
 	player.x = MAX_X/2;
 	player.y = MAX_Y/2;
+	player.wep = weapons[0];
+	player.arm = armors[0];
 	init_curses();
 	generate(1);
 	draw_creature(&player);

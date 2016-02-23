@@ -8,7 +8,8 @@ extern tile FLOOR;
 extern tile WALL;
 extern creature monsters[MAX_MONSTERS];
 extern creature level_cre[MAX_LEVELCRE];
-
+extern weapon weapons[MAX_WEAPONS];
+extern armor armors[MAX_ARMORS];
 /* graphics.c */
 void init_curses(); //Initialize curses for use
 void draw_map(); //Draw the map onto the curses window
@@ -34,4 +35,5 @@ void populate_level(int,int,int); //Numof, type, reset
 /* rng.c */
 void rnd_seed(int);
 int rnd(int,int);
+int dice(int,int);
 #endif

@@ -41,5 +41,10 @@ void cmove(creature *cre, int dir) {
 }
 
 void attack(creature *atk, creature *def) {
-	printf("%s attacked %s\n", atk->name, def->name);
+	mvprintw(MAX_Y+2, 2, "%s attacked %s", atk->name, def->name);
+	int damage = dice(atk->wep.dice, atk->wep.sides);
+	if(damage >= (dice(def->arm.dice, def->arm.sides))) {
+		def->hp = def->hp - damage;
+		mvprintw(MAX_Y+3, 2, "%s hit for %d damage. Remaining HP: %d", atk->name, damage, def->hp);
+	}
 }

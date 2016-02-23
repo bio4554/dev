@@ -3,12 +3,29 @@
 
 typedef const char* string;
 
+typedef struct {
+	string name;
+	string desc;
+	int dice;
+	int sides;
+} weapon;
+
+typedef struct {
+	string name;
+	string desc;
+	int dice;
+	int sides;
+} armor;
 
 typedef struct {
 	string name;
 	char icon;
 	int x;
 	int y;
+	weapon wep;
+	armor arm;
+	int hp;
+	int maxhp;
 } creature;
 
 typedef struct {
