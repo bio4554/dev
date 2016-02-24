@@ -10,10 +10,12 @@ int main()
 	creature player;
 	player.name = "Player";
 	player.icon = '@';
+    player.hp = 100;
+    player.maxhp = 100;
 	player.x = MAX_X/2;
 	player.y = MAX_Y/2;
-	player.wep = weapons[0];
-	player.arm = armors[0];
+	player.wep = &weapons[0];
+	player.arm = &armors[0];
 	init_curses();
 	generate(1);
 	draw_creature(&player);
@@ -33,6 +35,7 @@ int main()
 		draw_creature(&player);
 		draw_level_cre();
 		draw_map();
+        draw_ui(&player);
 		refresh();
 	}
 	endwin();

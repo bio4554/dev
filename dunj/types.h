@@ -1,29 +1,28 @@
 #ifndef TYPES_H
 #define TYPES_H
 
-typedef const char* string;
 
 typedef struct {
-	string name;
-	string desc;
+	const char* name;
+	const char* desc;
 	int dice;
 	int sides;
 } weapon;
 
 typedef struct {
-	string name;
-	string desc;
+	const char* name;
+	const char* desc;
 	int dice;
 	int sides;
 } armor;
 
 typedef struct {
-	string name;
+	const char* name;
 	char icon;
 	int x;
 	int y;
-	weapon wep;
-	armor arm;
+	weapon *wep;
+	armor *arm;
 	int hp;
 	int maxhp;
 } creature;

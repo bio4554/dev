@@ -6,15 +6,17 @@ extern tile cave[MAX_X][MAX_Y];
 
 extern tile FLOOR;
 extern tile WALL;
+extern const weapon weapons[MAX_WEAPONS];
+extern const armor armors[MAX_ARMORS];
+
 extern creature monsters[MAX_MONSTERS];
 extern creature level_cre[MAX_LEVELCRE];
-extern weapon weapons[MAX_WEAPONS];
-extern armor armors[MAX_ARMORS];
 /* graphics.c */
 void init_curses(); //Initialize curses for use
 void draw_map(); //Draw the map onto the curses window
 int ccheck(int,int,int,tile); //Usesless function, to be removed
 void place_tile(int,int,tile); //Place a tile at given coordinates
+void draw_ui(creature*);
 
 /* generate.c */
 void generate(int); //Generate a new dungeon of given type
@@ -36,4 +38,7 @@ void populate_level(int,int,int); //Numof, type, reset
 void rnd_seed(int);
 int rnd(int,int);
 int dice(int,int);
+
+/* monsters.c */
+void init_monsters();
 #endif

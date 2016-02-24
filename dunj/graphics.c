@@ -44,3 +44,10 @@ int ccheck(int x, int y, int dir, tile check) {
 void printm(char* str) {
 	mvprintw(MAX_Y+2, 2, "%s", str); 
 }
+
+void draw_ui(creature *cre) {
+    mvprintw(MAX_Y/2, MAX_X+5, "HP: %d out of %d", cre->hp, cre->maxhp);
+    mvprintw(MAX_Y/2+1, MAX_X+5, "Weapon: %s", cre->wep->name);
+    mvprintw(MAX_Y/2+2, MAX_X+5, "Damage Roll: %dd%d", cre->wep->dice, cre->wep->sides);
+    mvprintw(MAX_Y/2+3, MAX_X+5, "Armor: %s", cre->arm->name);
+}
