@@ -18,6 +18,7 @@ int ccheck(int,int,int,tile); //Usesless function, to be removed
 void place_tile(int,int,tile); //Place a tile at given coordinates
 void draw_ui(creature*);
 int is_near(int,int,int,int);
+void clearln(int,int);
 
 /* generate.c */
 void generate(int); //Generate a new dungeon of given type

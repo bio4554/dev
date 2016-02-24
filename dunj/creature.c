@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <ncurses.h>
+#include <string.h>
 #include "config.h"
 #include "types.h"
 #include "externs.h"
@@ -41,14 +42,20 @@ void cmove(creature *cre, int dir) {
 }
 
 void attack(creature *atk, creature *def) {
-	mvprintw(MAX_Y+2, 2, "%s attacked %s with %s", atk->name, def->name, atk->wep->name);
-	int damage = dice(atk->wep->dice, atk->wep->sides);
-	mvprintw(MAX_Y+3, 2, "Rolled %dd%d: %d", atk->wep->dice, atk->wep->sides, damage);
-	if(damage >= (dice(def->arm->dice, def->arm->sides))) {
-		def->hp = def->hp - damage;
-		mvprintw(MAX_Y+4, 2, "%s hit for %d damage. Remaining HP: %d", atk->name, damage, def->hp);
+	if(strncmp(atk->name, "Player", 6) != 0)
+	{
+		mvprintw(MAX_Y+2, 2, "%s attacked %s with %s", atk->name, def->name, atk->wep->name);
+		int damage = dice(atk->wep->dice, atk->wep->sides);
+		mvprintw(MAX_Y+3, 2, "Rolled %dd%d: %d", atk->wep->dice, atk->wep->sides, damage);
+		if(damage >= (dice(def->arm->dice, def->arm->sides))) {
+			def->hp = def->hp - damage;
+			mvprintw(MAX_Y+4, 2, "%s hit for %d damage. Remaining HP: %d", atk->name, damage, def->hp);
+		}
+	} else if(strncmp(atk->name, "Player", 6) == 0)
+	{
+		mvprintw(MAX_Y/2+8, MAX_X+2, "You attack the %s with a %s", def->name, atk->wep->name);	
 	}
-}
+}	
 
 void ai_step(creature *cre, creature *player) {
 	int choice; //Choice for creature, move or attack

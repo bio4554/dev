@@ -23,6 +23,7 @@ int main()
 	draw_map();
 	refresh();
 	while((c=getch())!='q') {
+		clear(); //NASTY HACK NEEDS TO BE FIXED
 		place_tile(player.x, player.y, FLOOR);
 		if(c=='w')
 			cmove(&player, 1);

@@ -22,6 +22,12 @@ void place_tile(int x1, int y1, tile temp) {
 	cave[x1][y1] = temp;
 }
 
+void clearln(int x, int y) {
+	int i = 0;
+	for(i = x; i < MAX_X; i++)
+		mvprintw(y, x, " ");
+}
+
 int ccheck(int x, int y, int dir, tile check) {
 	printf("\n\n %c check %c\n", cave[x][y].icon, check.icon);
 	if(dir == 1)
