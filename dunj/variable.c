@@ -10,9 +10,9 @@ tile WALL = {'#', 0, 0};
 creature level_cre[MAX_LEVELCRE];
 
 weapon weapons[MAX_WEAPONS] = {
-	{"Sword", "A steel sword", 1, 6},
+	{"Sword", "A steel sword", 2, 6},
 };
 
 armor armors[MAX_ARMORS] = {
-	{"Dragon", "Leather armor", 5, 10},
+	{"Leather", "Leather armor", 1, 10},
 };
