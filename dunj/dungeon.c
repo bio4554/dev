@@ -1,3 +1,4 @@
+#include <string.h>
 #include "config.h"
 #include "types.h"
 #include "externs.h"
@@ -11,7 +12,7 @@ void init_cre() {
 void draw_level_cre() {
 	for(int i = 0; i < MAX_LEVELCRE; i++)
 	{
-		if(level_cre[i].name != "BLANK")
+		if(strncmp(level_cre[i].name, "BLANK", 5) != 0)
 		{
 			draw_creature(&level_cre[i]);
 		}
@@ -40,5 +41,14 @@ void populate_level(int numof, int type, int reset) {
 			get_rand_loc(&level_cre[p]);
 			p++;
 		}
+	}
+}
+
+void process_ai(creature *player) {
+	int i;
+	for(i = 0; i < MAX_LEVELCRE; i++)
+	{
+		if(strncmp(level_cre[i].name, "BLANK", 5) != 0)
+			ai_step(&level_cre[i], player);	
 	}
 }

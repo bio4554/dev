@@ -49,3 +49,14 @@ void attack(creature *atk, creature *def) {
 		mvprintw(MAX_Y+4, 2, "%s hit for %d damage. Remaining HP: %d", atk->name, damage, def->hp);
 	}
 }
+
+void ai_step(creature *cre, creature *player) {
+	int choice; //Choice for creature, move or attack
+	if(is_near(cre->x, cre->y, player->x, player->y) > 0) //Player is next to cre
+		choice = 1;
+	else
+		choice = 0;
+
+	if(choice == 1)
+		attack(cre, player);
+}

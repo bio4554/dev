@@ -32,6 +32,7 @@ int main()
 			cmove(&player, 3);
 		if(c=='d')
 			cmove(&player, 4);
+		process_ai(&player);
 		draw_creature(&player);
 		draw_level_cre();
 		draw_map();

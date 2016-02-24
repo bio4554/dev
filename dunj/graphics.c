@@ -1,5 +1,6 @@
 #include <ncurses.h>
 #include <stdio.h>
+#include <string.h>
 #include "config.h"
 #include "types.h"
 #include "externs.h"
@@ -50,4 +51,16 @@ void draw_ui(creature *cre) {
     mvprintw(MAX_Y/2+1, MAX_X+5, "Weapon: %s", cre->wep->name);
     mvprintw(MAX_Y/2+2, MAX_X+5, "Damage Roll: %dd%d", cre->wep->dice, cre->wep->sides);
     mvprintw(MAX_Y/2+3, MAX_X+5, "Armor: %s", cre->arm->name);
+}
+
+int is_near(int x1, int y1, int x2, int y2) {
+	if(x1+1 == x2 && y1 == y2)
+		return 4;
+	if(x1-1 == x2 && y1 == y2)
+		return 3;
+	if(x1 == x2 && y1+1 == y2)
+		return 2;
+	if(x1 == x2 && y1-1 == y2)
+		return 1;
+	return 0;
 }
