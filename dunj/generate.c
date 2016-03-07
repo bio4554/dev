@@ -38,10 +38,18 @@ void get_rand_loc(creature *cre) {
 
 void generate(int type) {
 	init_cre();
+	int tx, ty;
+	int i;
 	if(type == 1) {//Cave
 		init_cre();
 		fill(0, 0, MAX_X, MAX_Y, WALL); 
 		fill(MAX_X/2-10, MAX_Y/2-5, MAX_X/2+10, MAX_Y/2+5, FLOOR);
+		for(i = 0; i < MAX_DUNG; i++) {	
+			do {
+				tx = rnd(0, MAX_X);
+				ty = rnd(0, MAX_Y);
+			} while(next_to(tx, ty, &WALL) != 1);
+		}
 		populate_level(5, 0, 0);
 		populate_level(2, 1, 0);
 	}

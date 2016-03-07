@@ -7,5 +7,5 @@
 #define MAX_LEVELCRE 100
 #define MAX_WEAPONS 100
 #define MAX_ARMORS 100
-
+#define MAX_DUNG 1
 #endif

@@ -19,6 +19,7 @@ void place_tile(int,int,tile); //Place a tile at given coordinates
 void draw_ui(creature*);
 int is_near(int,int,int,int);
 void clearln(int,int);
+int next_to(int,int,tile*);
 
 /* generate.c */
 void generate(int); //Generate a new dungeon of given type
@@ -30,6 +31,8 @@ void draw_creature(creature*); //Draw given creature onto screen
 void cmove(creature*,int); //Move a given creature in a given direction
 void attack(creature*, creature*);
 void ai_step(creature*,creature*);
+int dirtoc(int,int,int,int);
+
 
 /* dungeon.c */
 void init_cre(); //Initialize level creature stack for use MUST RUN ONCE BEFORE EACH NEW LEVEL

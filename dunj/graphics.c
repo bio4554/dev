@@ -70,3 +70,16 @@ int is_near(int x1, int y1, int x2, int y2) {
 		return 1;
 	return 0;
 }
+
+int next_to(int x, int y, tile *check) {
+	if(cave[x-1][y].icon == check->icon) {
+		return 1;
+	} else if(cave[x+1][y].icon == check->icon) {
+		return 1;
+	} else if(cave[x][y-1].icon == check->icon) {
+		return 1;
+	} else if(cave[x][y+1].icon == check->icon) {
+		return 1;
+	}
+	return 0;
+}

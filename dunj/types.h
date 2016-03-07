@@ -34,5 +34,11 @@ typedef struct {
 	creature *cre;
 } tile;
 
+typedef struct {
+	int x;
+	int y;
+	int cost;
+} coord;
+
 
 #endif

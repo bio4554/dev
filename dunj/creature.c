@@ -70,6 +70,43 @@ void ai_step(creature *cre, creature *player) {
 	else
 		choice = 0;
 
-	if(choice == 1)
+	if(choice == 1) { //Attack player
 		attack(cre, player);
+	}
+	if(choice == 0) { //Move to player
+		
+	}
+}
+
+int dirtoc(int x1, int y1, int x2, int y2) {
+	coord openlist[MAX_Y*MAX_X];
+	coord closelist[MAX_Y*MAX_X];
+	int i, oi, h;
+	oi = 0;
+	
+	openlist[oi] = {x1, y1, 0};
+	for(i = 1; i < 4; i++) {
+		if(i == 1) //Dir up
+			if(cave[x1][y1-1].walk == 1) {
+				oi++;
+				openlist[oi] = {x1, y1-1, openlist[oi-1].cost+1};
+			}
+		else if(i == 2) //Dir down
+			if(cave[x1][y1+1].walk == 1) {
+				oi++;
+				openlist[oi] = {x1, y1+1, openlist[oi-1].cost+1};
+			}
+		else if(i == 3) //Dir left
+			if(cave[x1-1][y1].walk == 1) {
+				oi++;
+				openlist[oi] = {x1-1, y1, openlist[oi-1].cost+1};
+			}
+		else if(i == 4) //Dir right
+			if(cave[x1+1][y1].walk == 1) {
+				oi++;
+				openlist[oi] = {x1+1, y1, openlist[oi-1].cost+1};
+			}
+	}
+	
+	return 0;
 }
