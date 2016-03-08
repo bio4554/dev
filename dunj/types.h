@@ -37,8 +37,8 @@ typedef struct {
 typedef struct {
 	int x;
 	int y;
-	int cost;
-} coord;
+	char icon;
+} node;
 
 
 #endif

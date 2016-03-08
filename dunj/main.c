@@ -16,8 +16,11 @@ int main()
 	player.y = MAX_Y/2;
 	player.wep = &weapons[0];
 	player.arm = &armors[0];
-	init_curses();
+	//init_curses();
 	generate(1);
+	initnodes();
+	dirtoc(0,0,0,0);
+	/*
 	draw_creature(&player);
 	draw_level_cre();
 	draw_map();
@@ -40,6 +43,7 @@ int main()
         draw_ui(&player);
 		refresh();
 	}
+	*/
 	endwin();
 	return 0;
 }

@@ -78,35 +78,19 @@ void ai_step(creature *cre, creature *player) {
 	}
 }
 
-int dirtoc(int x1, int y1, int x2, int y2) {
-	coord openlist[MAX_Y*MAX_X];
-	coord closelist[MAX_Y*MAX_X];
-	int i, oi, h;
-	oi = 0;
-	
-	openlist[oi] = {x1, y1, 0};
-	for(i = 1; i < 4; i++) {
-		if(i == 1) //Dir up
-			if(cave[x1][y1-1].walk == 1) {
-				oi++;
-				openlist[oi] = {x1, y1-1, openlist[oi-1].cost+1};
-			}
-		else if(i == 2) //Dir down
-			if(cave[x1][y1+1].walk == 1) {
-				oi++;
-				openlist[oi] = {x1, y1+1, openlist[oi-1].cost+1};
-			}
-		else if(i == 3) //Dir left
-			if(cave[x1-1][y1].walk == 1) {
-				oi++;
-				openlist[oi] = {x1-1, y1, openlist[oi-1].cost+1};
-			}
-		else if(i == 4) //Dir right
-			if(cave[x1+1][y1].walk == 1) {
-				oi++;
-				openlist[oi] = {x1+1, y1, openlist[oi-1].cost+1};
-			}
+void initnodes() {
+	int i = 0;
+	for(int x = 0; x < MAX_X; x++) {
+		for(int y = 0; y < MAX_Y; y++) {
+			setnode(&unvisited[i], x, y, cave[x][y].icon);
+			i++;
+		}
 	}
-	
+}
+
+int dirtoc(int x1, int y1, int x2, int y2) {
+	for(int i = 0; i < MAX_X*MAX_Y; i++) {
+	printf("\n%d, %d, %c", unvisited[i].x, unvisited[i].y, unvisited[i].icon);
+	}	
 	return 0;
 }

@@ -11,6 +11,7 @@ extern armor armors[MAX_ARMORS];
 
 extern creature monsters[MAX_MONSTERS];
 extern creature level_cre[MAX_LEVELCRE];
+extern node unvisited[MAX_X*MAX_Y];
 /* graphics.c */
 void init_curses(); //Initialize curses for use
 void draw_map(); //Draw the map onto the curses window
@@ -31,6 +32,7 @@ void draw_creature(creature*); //Draw given creature onto screen
 void cmove(creature*,int); //Move a given creature in a given direction
 void attack(creature*, creature*);
 void ai_step(creature*,creature*);
+void initnodes();
 int dirtoc(int,int,int,int);
 
 
@@ -48,4 +50,7 @@ int dice(int,int);
 
 /* monsters.c */
 void init_monsters();
+
+/* variable.c  */
+void setnode(node*, int, int, char);
 #endif

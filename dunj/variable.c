@@ -16,3 +16,11 @@ weapon weapons[MAX_WEAPONS] = {
 armor armors[MAX_ARMORS] = {
 	{"Leather", "Leather armor", 1, 10},
 };
+
+node unvisited[MAX_X*MAX_Y];
+
+void setnode(node *n, int x, int y, char c) {
+	n->x = x;
+	n->y = y;
+	n->icon = c;
+}
