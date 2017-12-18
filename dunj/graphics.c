@@ -29,21 +29,45 @@ void clearln(int x, int y) {
 }
 
 int ccheck(int x, int y, int dir, tile check) {
-	printf("\n\n %c check %c\n", cave[x][y].icon, check.icon);
-	if(dir == 1)
-		if(cave[x][y-1].icon == check.icon)
-			return 1;
-	else if(dir == 2)
-		if(cave[x][y+1].icon == check.icon)
-			return 1;
-	else if(dir == 3)
-		if(cave[x-1][y].icon == check.icon)
-			return 1;
-	else if(dir == 4)
-		if(cave[x+1][y].icon == check.icon)
-			return 1;
-	else
-			return 0;
+	//printf("\n\n %c check %c\n", cave[x][y].icon, check.icon);
+	if(dir == 1) {
+		if(y-1 >= 0) {
+			if(cave[x][y-1].icon == check.icon) {
+				return 1;
+			}
+		}
+	} else if(dir == 2) {
+		if(y+1 <= RES_Y)
+			if(cave[x][y+1].icon == check.icon)
+				return 1;
+	} else if(dir == 3) {
+		if(x-1 >= 0)
+			if(cave[x-1][y].icon == check.icon)
+				return 1;
+	} else if(dir == 4) {
+		if(x+1 <= RES_X)
+			if(cave[x+1][y].icon == check.icon)
+				return 1;
+	} else if(dir == 5) {
+		if(x+1 <= RES_X && y+1 <= RES_Y)
+			if(cave[x+1][y+1].icon == check.icon)
+				return 1;
+	} else if(dir == 6) {
+		if(x+1 <= RES_X && y-1 >= 0)
+			if(cave[x+1][y-1].icon == check.icon)
+				return 1;
+	} else if(dir == 7) {
+		if(x-1 >= 0 && y-1 >= 0)
+			if(cave[x-1][y-1].icon == check.icon)
+				return 1;
+	} else if(dir == 8) {
+		if(x-1 >= 0 && y+1 <= RES_Y)
+			if(cave[x-1][y+1].icon == check.icon)
+				return 1;
+	}
+			
+	
+	return 0;
 
 
 }

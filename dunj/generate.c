@@ -26,8 +26,8 @@ void get_rand_loc(creature *cre) {
 	creature *temp = cre;
 	do
 	{
-		x = rnd(0, MAX_X);
-		y = rnd(0, MAX_Y);
+		x = rnd(0, RES_X);
+		y = rnd(0, RES_Y);
 	}while(cave[x][y].walk < 1);
 	if(cave[x][y].walk > 0)
 	{
@@ -37,20 +37,78 @@ void get_rand_loc(creature *cre) {
 }
 
 void generate(int type) {
-	init_cre();
+/*	init_cre();
 	int tx, ty;
 	int i;
 	if(type == 1) {//Cave
 		init_cre();
-		fill(0, 0, MAX_X, MAX_Y, WALL); 
-		fill(MAX_X/2-10, MAX_Y/2-5, MAX_X/2+10, MAX_Y/2+5, FLOOR);
+		fill(0, 0, RES_X, RES_Y, WALL); 
+		fill(RES_X/2-10, RES_Y/2-5, RES_X/2+10, RES_Y/2+5, FLOOR);
 		for(i = 0; i < MAX_DUNG; i++) {	
 			do {
-				tx = rnd(0, MAX_X);
-				ty = rnd(0, MAX_Y);
+				tx = rnd(0, RES_X);
+				ty = rnd(0, RES_Y);
 			} while(next_to(tx, ty, &WALL) != 1);
 		}
 		populate_level(5, 0, 0);
 		populate_level(2, 1, 0);
 	}
+*/
+
+	int tx, ty;
+
+	tx = 0;
+	ty = 0;
+
+	//if(type == 1) {
+	
+	for(int ix = 0; ix < RES_X; ix++) {
+		for(int iy = 0; iy < RES_Y; iy++) {
+			int tc = rnd(0, 2);
+			if(tc == 0) {
+				cave[ix][iy] = WALL;
+			} else {
+				cave[ix][iy] = FLOOR;
+			}
+		}
+	}
+
+	for(int i = 0; i < 4; i++) {
+		for(int iy = 0; iy < RES_Y; iy++) {
+			for(int ix = 0; ix < RES_X; ix++) {
+				int count = 0;
+
+				for(int dc = 1; dc < 9; dc++) {
+					count = count + ccheck(ix, iy, dc, WALL);
+				}
+				/*
+				count = count + ccheck(ix, iy, 1, WALL);
+				count = count + ccheck(ix, iy, 2, WALL);
+				count = count + ccheck(ix, iy, 3, WALL);
+				count = count + ccheck(ix, iy, 4, WALL);
+				count = count + ccheck(ix, iy, 5, WALL);
+				count = count + ccheck(ix, iy, 6, WALL);
+				count = count + ccheck(ix, iy, 7, WALL);
+				count = count + ccheck(ix, iy, 8, WALL);
+				*/
+				if(cave[ix][iy].icon == WALL.icon) {
+					if(count < 4) {
+						cave[ix][iy] = FLOOR;
+					}
+				} else {
+					if(count >= 5) {
+						cave[ix][iy] = WALL;
+					}
+				}
+			}
+		}
+	}	
+
+/*
+ * 	815
+ * 	4 2
+ * 	736
+ */
+
+	//}
 }
