@@ -11,3 +11,5 @@
 #define RES_X 164
 #define RES_Y 67
 #endif
+
+// T60: 164 x 67

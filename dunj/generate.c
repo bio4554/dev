@@ -54,9 +54,7 @@ void generate(int type) {
 		populate_level(2, 1, 0);
 	}
 */
-
 	int tx, ty;
-
 	tx = 0;
 	ty = 0;
 
@@ -72,25 +70,13 @@ void generate(int type) {
 			}
 		}
 	}
-
-	for(int i = 0; i < 4; i++) {
+	for(int i = 0; i < 2; i++) {
 		for(int iy = 0; iy < RES_Y; iy++) {
 			for(int ix = 0; ix < RES_X; ix++) {
 				int count = 0;
-
 				for(int dc = 1; dc < 9; dc++) {
 					count = count + ccheck(ix, iy, dc, WALL);
 				}
-				/*
-				count = count + ccheck(ix, iy, 1, WALL);
-				count = count + ccheck(ix, iy, 2, WALL);
-				count = count + ccheck(ix, iy, 3, WALL);
-				count = count + ccheck(ix, iy, 4, WALL);
-				count = count + ccheck(ix, iy, 5, WALL);
-				count = count + ccheck(ix, iy, 6, WALL);
-				count = count + ccheck(ix, iy, 7, WALL);
-				count = count + ccheck(ix, iy, 8, WALL);
-				*/
 				if(cave[ix][iy].icon == WALL.icon) {
 					if(count < 4) {
 						cave[ix][iy] = FLOOR;
@@ -104,11 +90,14 @@ void generate(int type) {
 		}
 	}	
 
+	fill(0, 0, 5, RES_Y, WALL);
+	fill(0, 0, RES_X, 3, WALL);
+	fill(0, RES_Y, RES_X, RES_Y-3, WALL);
+	fill(RES_X-5, RES_Y, RES_X, 0, WALL);
+
 /*
  * 	815
  * 	4 2
  * 	736
  */
-
-	//}
 }
