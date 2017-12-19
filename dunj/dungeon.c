@@ -14,7 +14,12 @@ void draw_level_cre() {
 	{
 		if(strncmp(level_cre[i].name, "BLANK", 5) != 0)
 		{
-			draw_creature(&level_cre[i]);
+			if(level_cre[i].dead == 0) {
+				draw_creature(&level_cre[i]);
+			} else {
+				place_tile(level_cre[i].x,level_cre[i].y,FLOOR);
+				level_cre[i].name = "BLANK";
+			}
 		}
 	}
 }

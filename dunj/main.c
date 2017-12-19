@@ -10,8 +10,9 @@ int main()
 	creature player;
 	player.name = "Player";
 	player.icon = '@';
-    player.hp = 100;
-    player.maxhp = 100;
+	player.dead = 0;
+    	player.hp = 200;
+    	player.maxhp = 200;
 	player.x = MAX_X/2;
 	player.y = MAX_Y/2;
 	player.wep = &weapons[0];
@@ -28,7 +29,7 @@ int main()
 	draw_map();
 	draw_ui(&player);
 	refresh();
-	while((c=getch())!='q') {
+	while((c=getch())!='q' && player.dead != 1) {
 		clear(); //NASTY HACK NEEDS TO BE FIXED
 		place_tile(player.x, player.y, FLOOR);
 		if(c=='w')
@@ -39,16 +40,21 @@ int main()
 			cmove(&player, 3);
 		if(c=='d')
 			cmove(&player, 4);
-		if(c=='r')
+		if(c=='r') {
 			generate(1);
+			get_rand_loc(&player);
+			player.hp = player.maxhp;
+		}
 		process_ai(&player);
 		draw_creature(&player);
 		draw_level_cre();
 		draw_map();
-        draw_ui(&player);
+        	draw_ui(&player);
 		refresh();
 	}
 	
 	endwin();
+	if(player.dead != 0)
+		printf("\nYou died!\n\n");
 	return 0;
 }

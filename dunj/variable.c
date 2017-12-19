@@ -12,10 +12,12 @@ creature level_cre[MAX_LEVELCRE];
 
 weapon weapons[MAX_WEAPONS] = {
 	{"Sword", "A steel sword", 2, 6},
+	{"Fire spew", "A breath of fire", 2, 10},
 };
 
 armor armors[MAX_ARMORS] = {
 	{"Leather", "Leather armor", 1, 10},
+	{"Scales", "Scale plates", 1, 20},
 };
 
 node unvisited[MAX_X*MAX_Y];

@@ -97,6 +97,7 @@ void generate(int type) {
 	
 	populate_level(5, 0, 0);
 	populate_level(2, 1, 0);
+	populate_level(1, 2, 0);
 /*
  * 	815
  * 	4 2

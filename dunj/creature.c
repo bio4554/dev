@@ -41,24 +41,44 @@ void cmove(creature *cre, int dir) {
 
 }
 
+void death(creature *cre) {
+	if(cre->hp <= 0) {
+		cre->dead = 1;		
+	} 
+}
+
 void attack(creature *atk, creature *def) {
 	if(strncmp(atk->name, "Player", 6) != 0)
 	{
-	//	mvprintw(MAX_Y+2, 2, "%s attacked %s with %s", atk->name, def->name, atk->wep->name);
+		mvprintw(MAX_Y+2, 2, "%s attacked %s with %s", atk->name, def->name, atk->wep->name);
 		int damage = dice(atk->wep->dice, atk->wep->sides);
-	//	mvprintw(MAX_Y+3, 2, "Rolled %dd%d: %d", atk->wep->dice, atk->wep->sides, damage);
+		mvprintw(MAX_Y+3, 2, "Rolled %dd%d: %d", atk->wep->dice, atk->wep->sides, damage);
 		if(damage >= (dice(def->arm->dice, def->arm->sides))) {
 			def->hp = def->hp - damage;
-	//		mvprintw(MAX_Y+4, 2, "%s hit for %d damage. Remaining HP: %d", atk->name, damage, def->hp);
+			if(def->hp <= 0) {
+				mvprintw(MAX_Y+4, 2, "%s is dead!				", def->name);
+				death(def);
+			} else {
+				mvprintw(MAX_Y+4, 2, "%s hit for %d damage. Remaining HP: %d", atk->name, damage, def->hp);
+			}
 		}
 	} else if(strncmp(atk->name, "Player", 6) == 0)
 	{
-	//	mvprintw(MAX_Y/2+8, MAX_X+2, "You attack the %s with a %s", def->name, atk->wep->name);
+		mvprintw(MAX_Y/2+8, MAX_X+2, "You attack the %s with a %s", def->name, atk->wep->name);
 		int damage = dice(atk->wep->dice, atk->wep->sides);
-	//	mvprintw(MAX_Y/2+9, MAX_X+2, "Rolled %dd%d: %d", atk->wep->dice, atk->wep->sides, damage);
+		mvprintw(MAX_Y/2+9, MAX_X+2, "Rolled %dd%d: %d", atk->wep->dice, atk->wep->sides, damage);
 		if(damage >= (dice(def->arm->dice, def->arm->sides))) {
+
+
 			def->hp = def->hp - damage;
-	//		mvprintw(MAX_Y/2+10, MAX_X+2, "%s hit for %d damage. Remaining HP of attacked creature: %d", atk->name, damage, def->hp);
+			if(def->hp <= 0) {
+				mvprintw(MAX_Y+4, 2, "%s is dead!				", def->name);
+				death(def);
+			} else {
+				mvprintw(MAX_Y+4, 50, "%s hit for %d damage. Remaining HP: %d", atk->name, damage, def->hp);
+			}
+
+
 		}
 	}
 }	

@@ -26,6 +26,7 @@ typedef struct {
 	int hp;
 	int maxhp;
 	int color;
+	int dead;
 } creature;
 
 typedef struct {
