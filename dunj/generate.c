@@ -55,6 +55,7 @@ void generate(int type) {
 	}
 */
 	init_cre();
+	populate_level(0, 0, 1);
 	int tx, ty;
 	tx = 0;
 	ty = 0;
@@ -90,10 +91,10 @@ void generate(int type) {
 			}
 		}
 	}	
-	fill(0, 0, 5, RES_Y, WALL);
-	fill(0, 0, RES_X, 3, WALL);
-	fill(0, RES_Y, RES_X, RES_Y-3, WALL);
-	fill(RES_X-5, RES_Y, RES_X, 0, WALL);
+	fill(0, 0, 3, RES_Y, WALL);
+	fill(0, 0, RES_X, 2, WALL);
+	fill(0, RES_Y, RES_X, RES_Y-2, WALL);
+	fill(RES_X-3, RES_Y, RES_X, 0, WALL);
 	
 	populate_level(5, 0, 0);
 	populate_level(2, 1, 0);

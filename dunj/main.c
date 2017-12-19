@@ -41,6 +41,7 @@ int main()
 		if(c=='d')
 			cmove(&player, 4);
 		if(c=='r') {
+			init_curses();
 			generate(1);
 			get_rand_loc(&player);
 			player.hp = player.maxhp;

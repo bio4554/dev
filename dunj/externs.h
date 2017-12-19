@@ -4,6 +4,7 @@
 
 extern tile cave[MAX_X][MAX_Y];
 
+
 extern tile FLOOR;
 extern tile WALL;
 extern weapon weapons[MAX_WEAPONS];

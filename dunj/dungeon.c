@@ -3,6 +3,8 @@
 #include "types.h"
 #include "externs.h"
 
+int mp;
+
 void init_cre() {
 	creature blank = {"BLANK"};
 	for(int i = 0; i < MAX_LEVELCRE; i++)
@@ -25,26 +27,25 @@ void draw_level_cre() {
 }
 
 void add_cre(creature newcre) {
-	static int i = 0;
-	if(i < MAX_LEVELCRE)
+	if(mp < MAX_LEVELCRE)
 	{
-		level_cre[i] = newcre;
-		i++;
+		level_cre[mp] = newcre;
 	}
 }
 
 void populate_level(int numof, int type, int reset) {
-	static int p = 0; //Location in stack
+//	static int p = 0; //Location in stack
 	int i;
 	if(reset == 1)
-		p = 0;
+		mp = 0;
+//	printf("%d\n",mp);
 	if(type < MAX_MONSTERS)
 	{
 		for(i = 0; i < numof; i++)
 		{
 			add_cre(monsters[type]);
-			get_rand_loc(&level_cre[p]);
-			p++;
+			get_rand_loc(&level_cre[mp]);
+			mp++;
 		}
 	}
 }
