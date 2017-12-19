@@ -31,6 +31,7 @@ typedef struct {
 	char icon;
 	int walk; // TRUE or FALSE
 	int type; // 0 for material, 1 for creature
+	int color;
 	creature *cre;
 } tile;
 

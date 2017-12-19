@@ -17,6 +17,7 @@ int main()
 	player.wep = &weapons[0];
 	player.arm = &armors[0];
 	init_curses();
+	init_curse_colors();
 	generate(1);
 //	initnodes();
 	//dirtoc(0,0,0,0);

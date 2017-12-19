@@ -4,8 +4,9 @@
 
 tile cave[MAX_X][MAX_Y];
 
-tile FLOOR = {'.', 1, 0};
-tile WALL = {'#', 0, 0};
+tile FLOOR = {'.', 1, 0, 3};
+tile WALL = {'#', 0, 0, 5};
+tile SPACE = {' ', 0, 0, 6};
 
 creature level_cre[MAX_LEVELCRE];
 

@@ -6,7 +6,7 @@
 #include "externs.h"
 
 void draw_creature(creature *cre) {
-	tile cretemp = {cre->icon, 0, 1, cre};
+	tile cretemp = {cre->icon, 0, 1, 3, cre};
 	cave[cre->x][cre->y] = cretemp;
 }
 

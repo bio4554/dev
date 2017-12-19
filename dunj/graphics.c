@@ -7,15 +7,29 @@
 
 void init_curses() {
 	initscr();
+	start_color();
 	raw();
 	keypad(stdscr, TRUE);
 	noecho();
 }
 
+void init_curse_colors() {
+	init_pair(1, COLOR_RED, COLOR_BLACK);
+	init_pair(2, COLOR_WHITE, COLOR_BLACK);
+	init_pair(3, COLOR_GREEN, COLOR_BLACK);
+	init_pair(4, COLOR_BLACK, COLOR_WHITE);
+	init_pair(5, COLOR_BLACK, COLOR_GREEN);
+	init_pair(6, COLOR_BLACK, COLOR_BLACK);
+}
+
+
 void draw_map() {
 	for(int x = 0; x < MAX_X; x++)
-		for(int y = 0; y < MAX_Y; y++)
+		for(int y = 0; y < MAX_Y; y++) {
+			attron(COLOR_PAIR(cave[x][y].color));
 			mvaddch(y, x, cave[x][y].icon);
+			attroff(COLOR_PAIR(cave[x][y].color));
+		}
 }
 
 void place_tile(int x1, int y1, tile temp) {

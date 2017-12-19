@@ -89,7 +89,6 @@ void generate(int type) {
 			}
 		}
 	}	
-
 	fill(0, 0, 5, RES_Y, WALL);
 	fill(0, 0, RES_X, 3, WALL);
 	fill(0, RES_Y, RES_X, RES_Y-3, WALL);
