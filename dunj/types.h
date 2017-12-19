@@ -25,6 +25,7 @@ typedef struct {
 	armor *arm;
 	int hp;
 	int maxhp;
+	int color;
 } creature;
 
 typedef struct {

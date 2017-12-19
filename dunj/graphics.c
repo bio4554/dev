@@ -20,6 +20,7 @@ void init_curse_colors() {
 	init_pair(4, COLOR_BLACK, COLOR_WHITE);
 	init_pair(5, COLOR_BLACK, COLOR_GREEN);
 	init_pair(6, COLOR_BLACK, COLOR_BLACK);
+	init_pair(7, COLOR_RED, COLOR_WHITE);
 }
 
 
@@ -91,10 +92,18 @@ void printm(char* str) {
 }
 
 void draw_ui(creature *cre) {
-    mvprintw(MAX_Y/2, MAX_X+5, "HP: %d out of %d", cre->hp, cre->maxhp);
-    mvprintw(MAX_Y/2+1, MAX_X+5, "Weapon: %s", cre->wep->name);
-    mvprintw(MAX_Y/2+2, MAX_X+5, "Damage Roll: %dd%d", cre->wep->dice, cre->wep->sides);
-    mvprintw(MAX_Y/2+3, MAX_X+5, "Armor: %s", cre->arm->name);
+	int startx = MAX_X - 50;
+	int starty = MAX_Y/2+20;
+	for(int ix = startx; ix < startx+30; ix++) {
+		for(int iy = starty; iy < starty+10; iy++) {
+			
+		}
+	} 
+	
+	mvprintw(MAX_Y/2, MAX_X-30, "HP: %d out of %d", cre->hp, cre->maxhp);
+	mvprintw(MAX_Y/2+1, MAX_X-30, "Weapon: %s", cre->wep->name);
+	mvprintw(MAX_Y/2+2, MAX_X-30, "Damage Roll: %dd%d", cre->wep->dice, cre->wep->sides);
+	mvprintw(MAX_Y/2+3, MAX_X-30, "Armor: %s", cre->arm->name);
 }
 
 int is_near(int x1, int y1, int x2, int y2) {

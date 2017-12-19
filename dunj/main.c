@@ -16,15 +16,17 @@ int main()
 	player.y = MAX_Y/2;
 	player.wep = &weapons[0];
 	player.arm = &armors[0];
+	player.color = 1;
 	init_curses();
 	init_curse_colors();
 	generate(1);
 //	initnodes();
 	//dirtoc(0,0,0,0);
-	
-	//draw_creature(&player);
-	//draw_level_cre();
+	get_rand_loc(&player);
+	draw_creature(&player);
+	draw_level_cre();
 	draw_map();
+	draw_ui(&player);
 	refresh();
 	while((c=getch())!='q') {
 		clear(); //NASTY HACK NEEDS TO BE FIXED
@@ -39,11 +41,11 @@ int main()
 			cmove(&player, 4);
 		if(c=='r')
 			generate(1);
-//		process_ai(&player);
-		//draw_creature(&player);
-		//draw_level_cre();
+		process_ai(&player);
+		draw_creature(&player);
+		draw_level_cre();
 		draw_map();
-  //      draw_ui(&player);
+        draw_ui(&player);
 		refresh();
 	}
 	
