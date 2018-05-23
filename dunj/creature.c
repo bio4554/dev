@@ -6,11 +6,12 @@
 #include "externs.h"
 
 void draw_creature(creature *cre) {
-	tile cretemp = {cre->icon, 0, 1, cre->color, cre};
+	tile cretemp = {cre->icon, 0, 1, cre->color};
+	cretemp.cre = cre;
 	cave[cre->x][cre->y] = cretemp;
 }
 
-void cmove(creature *cre, int dir) {
+void cmove(creature *cre, int dir, item *prize) {
 	int x = cre->x;
 	int y = cre->y;
 	if(dir == 1)
@@ -26,18 +27,30 @@ void cmove(creature *cre, int dir) {
 		if(cave[x+1][y].walk == 1)
 			cre->x++;
 
-	if(dir == 1)
+	if(dir == 1) {
 		if(cave[x][y-1].type == 1)
 			attack(cre, cave[x][y-1].cre);
-	if(dir == 2)
+		if(cave[x][y-1].type == 3)
+			collect_prize(prize);
+	}
+	if(dir == 2) {
 		if(cave[x][y+1].type == 1)
 			attack(cre, cave[x][y+1].cre);
-	if(dir == 3)
+		if(cave[x][y+1].type == 3)
+			collect_prize(prize);
+	}
+	if(dir == 3) {
 		if(cave[x-1][y].type == 1)
 			attack(cre,cave[x-1][y].cre);
-	if(dir == 4)
+		if(cave[x-1][y].type == 3)
+			collect_prize(prize);
+	}
+	if(dir == 4) {
 		if(cave[x+1][y].type == 1)
 			attack(cre, cave[x+1][y].cre);
+		if(cave[x+1][y].type == 3)
+			collect_prize(prize);
+	}
 
 }
 
@@ -45,6 +58,17 @@ void death(creature *cre) {
 	if(cre->hp <= 0) {
 		cre->dead = 1;		
 	} 
+	int itempick = rnd(0, MAX_WEAPONS);
+	item dropitem = {""};
+	dropitem.name = weapons[itempick].name;
+	dropitem.icon = 'W';
+	dropitem.type = 1;
+	dropitem.index = itempick;
+	dropitem.x = cre->x;
+	dropitem.y = cre->y;
+
+	tile itemtemp = {dropitem.icon, 0, 0, 1};
+	cave[dropitem.x][dropitem.y] = itemtemp;
 }
 
 void attack(creature *atk, creature *def) {

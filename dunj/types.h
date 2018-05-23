@@ -19,6 +19,16 @@ typedef struct {
 typedef struct {
 	const char* name;
 	char icon;
+	int type; //0 armor, 1 weapon
+	int index;
+	int x;
+	int y;
+	int found;
+} item;
+
+typedef struct {
+	const char* name;
+	char icon;
 	int x;
 	int y;
 	weapon *wep;
@@ -35,6 +45,7 @@ typedef struct {
 	int type; // 0 for material, 1 for creature
 	int color;
 	creature *cre;
+	int seen;
 } tile;
 
 typedef struct {

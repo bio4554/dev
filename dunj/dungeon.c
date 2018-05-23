@@ -33,6 +33,10 @@ void add_cre(creature newcre) {
 	}
 }
 
+void collect_prize(item *prize) {
+	prize->found = 1;
+}
+
 void populate_level(int numof, int type, int reset) {
 //	static int p = 0; //Location in stack
 	int i;

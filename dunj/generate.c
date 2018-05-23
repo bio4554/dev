@@ -36,24 +36,67 @@ void get_rand_loc(creature *cre) {
 	}
 }
 
-void generate(int type) {
-/*	init_cre();
-	int tx, ty;
-	int i;
-	if(type == 1) {//Cave
-		init_cre();
-		fill(0, 0, RES_X, RES_Y, WALL); 
-		fill(RES_X/2-10, RES_Y/2-5, RES_X/2+10, RES_Y/2+5, FLOOR);
-		for(i = 0; i < MAX_DUNG; i++) {	
-			do {
-				tx = rnd(0, RES_X);
-				ty = rnd(0, RES_Y);
-			} while(next_to(tx, ty, &WALL) != 1);
-		}
-		populate_level(5, 0, 0);
-		populate_level(2, 1, 0);
+void move_item(int dir, item *thing) {
+	if(dir == 1) {
+		if(cave[thing->x][thing->y-1].walk == 1)
+		thing->y = thing->y - 1;
+	} else if(dir == 2) {
+		if(cave[thing->x-1][thing->y].walk == 1)
+		thing->x = thing->x - 1;
+	} else if(dir == 3) {
+		if(cave[thing->x+1][thing->y].walk == 1)
+		thing->x = thing->x + 1;
+	} else {
+		if(cave[thing->x][thing->y+1].walk == 1)
+		thing->y = thing->y + 1;
 	}
-*/
+}
+
+//  1
+// 2 3
+//  4
+
+
+
+
+void place_prize(creature *player, item *prize) {
+	int x;
+	int y;
+	int fail = 0;
+	do {
+		int dir = rnd(1, 4);
+		if(dir == 1) {
+			x = player->x;
+			y = player->y - 1;
+		} else if(dir == 2) {
+			x = player->x - 1;
+			y = player->y;
+		} else if(dir == 3) {
+			x = player->x + 1;
+			y = player->y;
+		} else {
+			x = player->x;
+			y = player->y + 1;
+		}
+		fail++;
+	} while(cave[x][y].walk != 1 && fail < 100);	
+
+
+
+	
+	prize->x = x;
+	prize->y = y;
+	for(int i = 0; i < 2000; i++) {
+		int dir = rnd(1, 4);
+		move_item(dir, prize);
+	}
+
+	tile temp = {prize->icon, 0, 3, 1}; 
+
+	cave[prize->x][prize->y] = temp;
+}
+
+void generate(int type) {
 	init_cre();
 	populate_level(0, 0, 1);
 	int tx, ty;
@@ -72,36 +115,43 @@ void generate(int type) {
 			}
 		}
 	}
-	for(int i = 0; i < 2; i++) {
-		for(int iy = 0; iy < RES_Y; iy++) {
-			for(int ix = 0; ix < RES_X; ix++) {
-				int count = 0;
-				for(int dc = 1; dc < 9; dc++) {
-					count = count + ccheck(ix, iy, dc, WALL);
-				}
-				if(cave[ix][iy].icon == WALL.icon) {
-					if(count < 4) {
-						cave[ix][iy] = FLOOR;
-					}
-				} else {
-					if(count >= 5) {
-						cave[ix][iy] = WALL;
-					}
-				}
-			}
-		}
+	for(int i = 0; i < 3; i++) {
+		cellular_automata();
 	}	
 	fill(0, 0, 3, RES_Y, WALL);
 	fill(0, 0, RES_X, 2, WALL);
 	fill(0, RES_Y, RES_X, RES_Y-2, WALL);
 	fill(RES_X-3, RES_Y, RES_X, 0, WALL);
 	
-	populate_level(5, 0, 0);
-	populate_level(2, 1, 0);
-	populate_level(1, 2, 0);
+//	populate_level(5, 0, 0);
+//	populate_level(2, 1, 0);
+//	populate_level(1, 2, 0);
 /*
  * 	815
  * 	4 2
  * 	736
  */
+}
+
+
+
+void cellular_automata() {
+	for(int iy = 0; iy < RES_Y; iy++) {
+		for(int ix = 0; ix < RES_X; ix++) {
+			int count = 0;
+			for(int dc = 1; dc < 9; dc++) {
+				count = count + ccheck(ix, iy, dc, WALL);
+			}
+			if(cave[ix][iy].icon == WALL.icon) {
+				if(count < 4) {
+					cave[ix][iy] = FLOOR;
+				}
+			} else {
+				if(count >= 5) {
+					cave[ix][iy] = WALL;
+				}
+			}
+		}
+	}
+
 }

@@ -24,12 +24,21 @@ void init_curse_colors() {
 }
 
 
-void draw_map() {
+void draw_map(int whole) {
 	for(int x = 0; x < MAX_X; x++)
 		for(int y = 0; y < MAX_Y; y++) {
-			attron(COLOR_PAIR(cave[x][y].color));
+			int tre = 0;
+			attron(COLOR_PAIR(3));
+			if(cave[x][y].seen == 1 || whole == 1) {
+			if(cave[x][y].icon == 'T' && whole != 1) {
+				cave[x][y].icon = '.';
+				tre = 1;
+			}
 			mvaddch(y, x, cave[x][y].icon);
-			attroff(COLOR_PAIR(cave[x][y].color));
+			}
+			if(tre == 1)
+				cave[x][y].icon = 'T';
+			attroff(COLOR_PAIR(2));
 		}
 }
 
@@ -89,6 +98,28 @@ int ccheck(int x, int y, int dir, tile check) {
 
 void printm(char* str) {
 	mvprintw(MAX_Y+2, 2, "%s", str); 
+}
+
+void draw_at(int x, int y) {
+	attron(COLOR_PAIR(cave[x][y].color));
+	mvaddch(y, x, cave[x][y].icon);
+	attroff(COLOR_PAIR(cave[x][y].color));
+	
+}
+
+void draw_fov(creature *cre, int fov) {
+	int cx = cre->x;
+	int cy = cre->y;
+	int fovx = fov+4;
+
+	for(int x = cx+fovx; x > cx-fovx; x--) {
+		for(int y = cy+fov; y > cy-fov; y--) {
+			if(x < MAX_X && y < MAX_Y) {
+				draw_at(x, y);
+				cave[x][y].seen = 1;
+			}
+		}
+	}
 }
 
 void draw_ui(creature *cre) {

@@ -18,9 +18,9 @@ void init_curses(); //Initialize curses for use
 void draw_map(); //Draw the map onto the curses window
 int ccheck(int,int,int,tile); //Usesless function, to be removed
 void place_tile(int,int,tile); //Place a tile at given coordinates
-void draw_ui(creature*);
-int is_near(int,int,int,int);
-void clearln(int,int);
+void draw_ui(creature*); //Draw UI with stats from given creature
+int is_near(int,int,int,int); 
+void clearln(int,int); //Clear written line
 int next_to(int,int,tile*);
 
 /* generate.c */
@@ -30,9 +30,9 @@ void get_rand_loc(creature*); //Set given creatures location to an empty locatio
 
 /* creature.c */
 void draw_creature(creature*); //Draw given creature onto screen
-void cmove(creature*,int); //Move a given creature in a given direction
-void attack(creature*, creature*);
-void ai_step(creature*,creature*);
+void cmove(creature*,int,item*); //Move a given creature in a given direction
+void attack(creature*, creature*); //Attack between two given creatures
+void ai_step(creature*,creature*); //Process one step for given creatures
 void initnodes();
 int dirtoc(int,int,int,int);
 

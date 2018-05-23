@@ -2,6 +2,8 @@
 #include "config.h"
 #include "types.h"
 #include "externs.h"
+#include <unistd.h>
+
 
 int main()
 {
@@ -18,41 +20,79 @@ int main()
 	player.wep = &weapons[0];
 	player.arm = &armors[0];
 	player.color = 1;
+	int score = 0;
+	item prize;
+	prize.name = "Treasure";
+	prize.icon = 'T';
+	prize.type = 3;
+	prize.found = 0;
 	init_curses();
-	init_curse_colors();
+	int prizegot = 0;
+        init_curse_colors();
 	generate(1);
 //	initnodes();
 	//dirtoc(0,0,0,0);
 	get_rand_loc(&player);
+	place_prize(&player, &prize);
 	draw_creature(&player);
-	draw_level_cre();
-	draw_map();
-	draw_ui(&player);
+//	draw_level_cre();
+//	draw_map();
+	draw_fov(&player, 5);
+	mvprintw(MAX_Y+2, 20, "Score: %d", score);
+	mvprintw(MAX_Y+2, MAX_X+2, " ");
+//	draw_ui(&player);
 	refresh();
 	while((c=getch())!='q' && player.dead != 1) {
 		clear(); //NASTY HACK NEEDS TO BE FIXED
 		place_tile(player.x, player.y, FLOOR);
-		if(c=='w')
-			cmove(&player, 1);
-		if(c=='s')
-			cmove(&player, 2);
-		if(c=='a')
-			cmove(&player, 3);
-		if(c=='d')
-			cmove(&player, 4);
+		if(c=='w' && prize.found != 1)
+			cmove(&player, 1, &prize);
+		if(c=='s' && prize.found != 1)
+			cmove(&player, 2, &prize);
+		if(c=='a' && prize.found != 1)
+			cmove(&player, 3, &prize);
+		if(c=='d' && prize.found != 1)
+			cmove(&player, 4, &prize);
 		if(c=='r') {
-			init_curses();
+//			init_curses();
 			generate(1);
 			get_rand_loc(&player);
+			prize.found = 0;
+			prizegot = 0;
+			place_prize(&player, &prize);
 			player.hp = player.maxhp;
 		}
-		process_ai(&player);
+
+
+		if(c == 't') {
+			cellular_automata();
+		}
+
+		if(c == 'l' && prize.found != 1) {
+			draw_map(1);
+		}
+
+		if(prize.found == 1) {
+			draw_map(1);
+			mvprintw(MAX_Y+2, ((MAX_X/2)-25), "You found the treasure. Press R to continue or Q to quit.");
+			if(prizegot == 0) {
+			score++;
+			prizegot = 1;
+			}
+		}
+			process_ai(&player);
 		draw_creature(&player);
-		draw_level_cre();
-		draw_map();
-        	draw_ui(&player);
+	//	draw_level_cre();
+		draw_map(0);
+		draw_fov(&player, 5);
+		//draw_map();
+  //      	draw_ui(&player);
+        	mvprintw(MAX_Y+2, 20, "Score: %d", score);
+		mvprintw(MAX_Y+2, MAX_X+2, " ");
 		refresh();
 	}
+
+	
 	
 	endwin();
 	if(player.dead != 0)
