@@ -30,20 +30,15 @@ int main()
 	int prizegot = 0;
         init_curse_colors();
 	generate(1);
-//	initnodes();
-	//dirtoc(0,0,0,0);
 	get_rand_loc(&player);
 	place_prize(&player, &prize);
 	draw_creature(&player);
-//	draw_level_cre();
-//	draw_map();
 	draw_fov(&player, 5);
 	mvprintw(MAX_Y+2, 20, "Score: %d", score);
 	mvprintw(MAX_Y+2, MAX_X+2, " ");
-//	draw_ui(&player);
 	refresh();
 	while((c=getch())!='q' && player.dead != 1) {
-		clear(); //NASTY HACK NEEDS TO BE FIXED
+		//clear(); //NASTY HACK NEEDS TO BE FIXED
 		place_tile(player.x, player.y, FLOOR);
 		if(c=='w' && prize.found != 1)
 			cmove(&player, 1, &prize);
@@ -55,6 +50,7 @@ int main()
 			cmove(&player, 4, &prize);
 		if(c=='r') {
 //			init_curses();
+			clear();
 			generate(1);
 			get_rand_loc(&player);
 			prize.found = 0;

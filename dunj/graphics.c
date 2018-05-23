@@ -114,7 +114,7 @@ void draw_fov(creature *cre, int fov) {
 
 	for(int x = cx+fovx; x > cx-fovx; x--) {
 		for(int y = cy+fov; y > cy-fov; y--) {
-			if(x < MAX_X && y < MAX_Y) {
+			if(x < MAX_X && x > 0 && y < MAX_Y && y > 0) {
 				draw_at(x, y);
 				cave[x][y].seen = 1;
 			}
