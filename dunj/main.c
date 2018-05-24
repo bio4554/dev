@@ -5,7 +5,7 @@
 #include <unistd.h>
 
 
-int main()
+int main(int argc, char *argv[])
 {
 	char c;
 	rnd_seed(0);
@@ -20,12 +20,19 @@ int main()
 	player.wep = &weapons[0];
 	player.arm = &armors[0];
 	player.color = 1;
+	int dif = 0;
+	printf("\nHow to play: Use WASD to move around the cave and search for the treasure. Press Q to quit. \n\nChoose the difficulty: \n 1. Easy: Step tracking, flashlight (Press L to use flashlight)\n 2. Medium: Step tracking, no flashlight\n 3. Hard: No step tracking, no flashlight\n\n>");
+//	fgets(dif, 1, stdin);
+//	printf("%d", argv[0]);
+        //dif = getchar();
+	scanf("%d", &dif);
 	int score = 0;
 	item prize;
 	prize.name = "Treasure";
 	prize.icon = 'T';
 	prize.type = 3;
 	prize.found = 0;
+	int usedLight = 0;
 	init_curses();
 	int prizegot = 0;
         init_curse_colors();
@@ -39,6 +46,10 @@ int main()
 	refresh();
 	while((c=getch())!='q' && player.dead != 1) {
 		//clear(); //NASTY HACK NEEDS TO BE FIXED
+		if(usedLight == 1 || dif == 3) {
+			clear();
+			usedLight = 0;
+		}
 		place_tile(player.x, player.y, FLOOR);
 		if(c=='w' && prize.found != 1)
 			cmove(&player, 1, &prize);
@@ -64,8 +75,9 @@ int main()
 			cellular_automata();
 		}
 
-		if(c == 'l' && prize.found != 1) {
+		if(c == 'l' && prize.found != 1 && dif == 1) {
 			draw_map(1);
+			usedLight = 1;
 		}
 
 		if(prize.found == 1) {
@@ -78,7 +90,7 @@ int main()
 		}
 			process_ai(&player);
 		draw_creature(&player);
-	//	draw_level_cre();
+		if(dif != 3)
 		draw_map(0);
 		draw_fov(&player, 5);
 		//draw_map();
