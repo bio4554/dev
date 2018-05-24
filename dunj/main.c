@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
 	player.arm = &armors[0];
 	player.color = 1;
 	int dif = 0;
-	printf("\nHow to play: Use WASD to move around the cave and search for the treasure. Press Q to quit. \n\nChoose the difficulty: \n 1. Easy: Step tracking, flashlight (Press L to use flashlight)\n 2. Medium: Step tracking, no flashlight\n 3. Hard: No step tracking, no flashlight\n\n>");
+	printf("\nHow to play: Use WASD to move around the cave and search for the treasure. Press P to quit. \n\nChoose the difficulty: \n 1. Easy: Step tracking, flashlight (Press L to use flashlight)\n 2. Medium: Step tracking, no flashlight\n 3. Hard: No step tracking, no flashlight\n\n>");
 //	fgets(dif, 1, stdin);
 //	printf("%d", argv[0]);
         //dif = getchar();
@@ -44,7 +44,7 @@ int main(int argc, char *argv[])
 	mvprintw(MAX_Y+2, 20, "Score: %d", score);
 	mvprintw(MAX_Y+2, MAX_X+2, " ");
 	refresh();
-	while((c=getch())!='q' && player.dead != 1) {
+	while((c=getch())!='p' && player.dead != 1) {
 		//clear(); //NASTY HACK NEEDS TO BE FIXED
 		if(usedLight == 1 || dif == 3) {
 			clear();
@@ -82,7 +82,7 @@ int main(int argc, char *argv[])
 
 		if(prize.found == 1) {
 			draw_map(1);
-			mvprintw(MAX_Y+2, ((MAX_X/2)-25), "You found the treasure. Press R to continue or Q to quit.");
+			mvprintw(MAX_Y+2, ((MAX_X/2)-25), "You found the treasure. Press R to continue or P to quit.");
 			if(prizegot == 0) {
 			score++;
 			prizegot = 1;

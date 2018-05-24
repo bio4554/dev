@@ -79,7 +79,7 @@ void place_prize(creature *player, item *prize) {
 			y = player->y + 1;
 		}
 		fail++;
-	} while(cave[x][y].walk != 1 && fail < 100);	
+	} while(cave[x][y].walk != 1 && fail < 1000);	
 
 
 
