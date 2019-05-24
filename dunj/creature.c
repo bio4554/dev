@@ -11,7 +11,7 @@ void draw_creature(creature *cre) {
 	cave[cre->x][cre->y] = cretemp;
 }
 
-void cmove(creature *cre, int dir, item *prize) {
+void cmove(creature *cre, int dir) {
 	int x = cre->x;
 	int y = cre->y;
 	if(dir == 1)
@@ -30,26 +30,26 @@ void cmove(creature *cre, int dir, item *prize) {
 	if(dir == 1) {
 		if(cave[x][y-1].type == 1)
 			attack(cre, cave[x][y-1].cre);
-		if(cave[x][y-1].type == 3)
-			collect_prize(prize);
+//		if(cave[x][y-1].type == 3)
+			//collect_prize(prize);
 	}
 	if(dir == 2) {
 		if(cave[x][y+1].type == 1)
 			attack(cre, cave[x][y+1].cre);
-		if(cave[x][y+1].type == 3)
-			collect_prize(prize);
+//		if(cave[x][y+1].type == 3)
+			//collect_prize(prize);
 	}
 	if(dir == 3) {
 		if(cave[x-1][y].type == 1)
 			attack(cre,cave[x-1][y].cre);
-		if(cave[x-1][y].type == 3)
-			collect_prize(prize);
+//		if(cave[x-1][y].type == 3)
+			//collect_prize(prize);
 	}
 	if(dir == 4) {
 		if(cave[x+1][y].type == 1)
 			attack(cre, cave[x+1][y].cre);
-		if(cave[x+1][y].type == 3)
-			collect_prize(prize);
+//		if(cave[x+1][y].type == 3)
+			//collect_prize(prize);
 	}
 
 }
@@ -74,9 +74,9 @@ void death(creature *cre) {
 void attack(creature *atk, creature *def) {
 	if(strncmp(atk->name, "Player", 6) != 0)
 	{
-		mvprintw(MAX_Y+2, 2, "%s attacked %s with %s", atk->name, def->name, atk->wep->name);
+		mvprintw(MAX_Y/2+20, 2, "%s attacked %s with %s", atk->name, def->name, atk->wep->name);
 		int damage = dice(atk->wep->dice, atk->wep->sides);
-		mvprintw(MAX_Y+3, 2, "Rolled %dd%d: %d", atk->wep->dice, atk->wep->sides, damage);
+		mvprintw(MAX_Y/2+21, 2, "Rolled %dd%d: %d", atk->wep->dice, atk->wep->sides, damage);
 		if(damage >= (dice(def->arm->dice, def->arm->sides))) {
 			def->hp = def->hp - damage;
 			if(def->hp <= 0) {
@@ -88,9 +88,9 @@ void attack(creature *atk, creature *def) {
 		}
 	} else if(strncmp(atk->name, "Player", 6) == 0)
 	{
-		mvprintw(MAX_Y/2+8, MAX_X+2, "You attack the %s with a %s", def->name, atk->wep->name);
+		mvprintw(MAX_Y/2+15, 80, "You attack the %s with a %s", def->name, atk->wep->name);
 		int damage = dice(atk->wep->dice, atk->wep->sides);
-		mvprintw(MAX_Y/2+9, MAX_X+2, "Rolled %dd%d: %d", atk->wep->dice, atk->wep->sides, damage);
+		mvprintw(MAX_Y/2+16, 80, "Rolled %dd%d: %d", atk->wep->dice, atk->wep->sides, damage);
 		if(damage >= (dice(def->arm->dice, def->arm->sides))) {
 
 
@@ -118,7 +118,7 @@ void ai_step(creature *cre, creature *player) {
 		attack(cre, player);
 	}
 	if(choice == 0) { //Move to player
-		
+		cmove(cre, dice(1,4));
 	}
 }
 

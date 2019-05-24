@@ -30,7 +30,7 @@ void get_rand_loc(creature*); //Set given creatures location to an empty locatio
 
 /* creature.c */
 void draw_creature(creature*); //Draw given creature onto screen
-void cmove(creature*,int,item*); //Move a given creature in a given direction
+void cmove(creature*,int); //Move a given creature in a given direction
 void attack(creature*, creature*); //Attack between two given creatures
 void ai_step(creature*,creature*); //Process one step for given creatures
 void initnodes();
@@ -40,6 +40,7 @@ int dirtoc(int,int,int,int);
 /* dungeon.c */
 void init_cre(); //Initialize level creature stack for use MUST RUN ONCE BEFORE EACH NEW LEVEL
 void draw_level_cre(); //Draw all the creatures in the level creature stack onto screen
+void clear_level_cre();
 void add_cre(creature); //Add a creature to the top of the stack
 void populate_level(int,int,int); //Numof, type, reset
 void process_ai(creature*);

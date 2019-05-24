@@ -26,6 +26,17 @@ void draw_level_cre() {
 	}
 }
 
+void clear_level_cre() {
+	for(int i = 0; i < MAX_LEVELCRE; i++)
+	{
+		if(strncmp(level_cre[i].name, "BLANK", 5) != 0) {
+			if(level_cre[i].dead == 0) {
+				place_tile(level_cre[i].x, level_cre[i].y,FLOOR);
+			}
+		}
+	}
+}
+
 void add_cre(creature newcre) {
 	if(mp < MAX_LEVELCRE)
 	{

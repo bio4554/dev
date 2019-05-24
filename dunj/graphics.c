@@ -25,8 +25,8 @@ void init_curse_colors() {
 
 
 void draw_map(int whole) {
-	for(int x = 0; x < MAX_X; x++)
-		for(int y = 0; y < MAX_Y; y++) {
+	for(int x = 0; x < RES_X; x++)
+		for(int y = 0; y < RES_Y; y++) {
 			int tre = 0;
 			attron(COLOR_PAIR(3));
 			if(cave[x][y].seen == 1 || whole == 1) {
@@ -143,10 +143,10 @@ void draw_ui(creature *cre) {
 	}	
 */
 	
-	mvprintw(MAX_Y/2, MAX_X+20, "HP: %d out of %d", cre->hp, cre->maxhp);
-	mvprintw(MAX_Y/2+1, MAX_X+20, "Weapon: %s", cre->wep->name);
-	mvprintw(MAX_Y/2+2, MAX_X+20, "Damage Roll: %dd%d", cre->wep->dice, cre->wep->sides);
-	mvprintw(MAX_Y/2+3, MAX_X+20, "Armor: %s", cre->arm->name);
+	mvprintw(MAX_Y/2+10, 20, "HP: %d out of %d", cre->hp, cre->maxhp);
+	mvprintw(MAX_Y/2+11, 20, "Weapon: %s", cre->wep->name);
+	mvprintw(MAX_Y/2+12, 20, "Damage Roll: %dd%d", cre->wep->dice, cre->wep->sides);
+	mvprintw(MAX_Y/2+13, 20, "Armor: %s", cre->arm->name);
 }
 
 int is_near(int x1, int y1, int x2, int y2) {

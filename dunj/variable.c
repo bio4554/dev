@@ -14,7 +14,7 @@ creature level_cre[MAX_LEVELCRE];
 weapon weapons[MAX_WEAPONS] = {
 	{"Sword", "A steel sword", 2, 6},
 	{"Fire spew", "A breath of fire", 2, 10},
-	{"Golden Sword", "A golden sword", 2, 8},
+	{"Golden Sword", "A golden sword", 3, 10},
 };
 
 armor armors[MAX_ARMORS] = {

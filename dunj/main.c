@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
     	player.maxhp = 200;
 	player.x = MAX_X/2;
 	player.y = MAX_Y/2;
-	player.wep = &weapons[0];
+	player.wep = &weapons[2];
 	player.arm = &armors[0];
 	player.color = 1;
 	int dif = 0;
@@ -51,14 +51,16 @@ int main(int argc, char *argv[])
 			usedLight = 0;
 		}
 		place_tile(player.x, player.y, FLOOR);
+		clear_level_cre();
+		//draw_level_cre();
 		if(c=='w' && prize.found != 1)
-			cmove(&player, 1, &prize);
+			cmove(&player, 1);
 		if(c=='s' && prize.found != 1)
-			cmove(&player, 2, &prize);
+			cmove(&player, 2);
 		if(c=='a' && prize.found != 1)
-			cmove(&player, 3, &prize);
+			cmove(&player, 3);
 		if(c=='d' && prize.found != 1)
-			cmove(&player, 4, &prize);
+			cmove(&player, 4);
 		if(c=='r') {
 //			init_curses();
 			clear();
@@ -90,11 +92,12 @@ int main(int argc, char *argv[])
 		}
 			process_ai(&player);
 		draw_creature(&player);
+		draw_level_cre();
 		if(dif != 3)
 		draw_map(0);
 		draw_fov(&player, 5);
 		//draw_map();
-  //      	draw_ui(&player);
+       	draw_ui(&player);
         	mvprintw(MAX_Y+2, 20, "Score: %d", score);
 		mvprintw(MAX_Y+2, MAX_X+2, " ");
 		refresh();
